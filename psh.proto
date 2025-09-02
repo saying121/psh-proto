@@ -45,10 +45,21 @@ message SendHostInfoReq {
 
 message Task {
   string id = 1;
-  bytes wasm = 2;
-  repeated string wasm_args = 3;
+  oneof task_type {
+    WasmTask wasm_task = 2;
+    ProfilingTask profiling_task = 3;
+  }
   // Number of non-leap-milliseconds since Jan 1, 1970 UTC.
   uint64 end_time = 4;
+}
+
+message WasmTask {
+  bytes wasm = 1;
+  repeated string wasm_args = 2;
+}
+
+message ProfilingTask {
+  int32 pid = 1;
 }
 
 message ExportDataReq {
