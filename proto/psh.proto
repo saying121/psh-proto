@@ -53,6 +53,12 @@ message Task {
   oneof task_type {
     WasmTask wasm = 3;
     ProfilingTask profiling = 4;
+    UploadElfTask upload_elf = 5;
+  }
+
+  message UploadElfTask {
+    string filename = 1;
+    optional string build_id = 2;
   }
 
   message WasmTask {
