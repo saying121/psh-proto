@@ -16,7 +16,17 @@ service PshService {
 message Unit {}
 message GetTaskReq { string instance_id = 1; }
 message GetTaskResp { optional Task task = 1; }
-message TaskDoneReq { string task_id = 1; }
+message TaskDoneReq {
+  string task_id = 1;
+  TaskStatus status = 2;
+
+  enum TaskStatus {
+    Ok = 0;
+    NotFound = 1;
+    AccessDeined = 2;
+    BadBuildId = 3;
+  }
+}
 message NewInstanceIdResp { string instance_id = 1; }
 
 message HeartbeatReq {
